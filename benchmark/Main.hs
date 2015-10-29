@@ -14,6 +14,7 @@ import qualified Main.ListT
 import qualified Data.ByteString.Builder
 import qualified Data.ByteString.Lazy
 import qualified Data.ByteString
+import qualified Data.ByteString.FastBuilder
 
 
 main =
@@ -48,6 +49,9 @@ sampleGroup (title, sample) =
     ,
     bench "Main.BinaryTreeWithSize" $ nf sample $
     (Main.BinaryTreeWithSize.bytes, mappend, mempty, Main.BinaryTreeWithSize.bytesOf)
+    ,
+    bench "FastBuilder" $ nf sample $
+    (Data.ByteString.FastBuilder.byteString, mappend, mempty, Data.ByteString.FastBuilder.toStrictByteString)
     ,
     bench "Main.ListT" $ nf sample $
     (Main.ListT.bytes, mappend, mempty, Main.ListT.bytesOf)
